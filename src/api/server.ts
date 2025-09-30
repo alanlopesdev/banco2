@@ -6,7 +6,6 @@ import { db } from '../db/index'
 import { usersTable } from "../db/schema";
 import { eq } from 'drizzle-orm'
 
-let cpf : string = ""
 // Cria a instância do aplicativo Express
 const app = express();
 // Define a porta em que o servidor vai rodar
