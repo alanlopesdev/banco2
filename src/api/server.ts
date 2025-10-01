@@ -41,7 +41,7 @@ app.get("/users", async (req, res) => {
 app.get("/login/:cpf/", async (req, res) =>{
   try {
   let cpf = req.params.cpf
-  const user = await db.select().from(usersTable).where(eq(usersTable.cpf, `\"${cpf}\"`))
+  const user = await db.select().from(usersTable).where(eq(usersTable.cpf, `${cpf}`))
   res.status(200).json({name : user[0].name})
   }
   catch(err){
