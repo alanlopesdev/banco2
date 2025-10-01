@@ -12,7 +12,7 @@ async function main() {
   const user: typeof usersTable.$inferInsert = {
     name: 'John',
     saldo: 30,
-    cpf: '18378496767'
+    cpf: '00000000000'
   };
 
   await db.insert(usersTable).values(user);
