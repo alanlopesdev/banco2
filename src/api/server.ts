@@ -54,9 +54,10 @@ app.get("/login/:cpf/", async (req, res) =>{
 app.post("/login", async (req, res) =>{
   try{
   const dados = req.body
+  console.log(dados)
   const user = await db.select().from(usersTable).where(eq(usersTable.cpf, `${dados.cpfPost}`))
   if (dados.cpfPost === user[0].cpf && dados.senhaPost === user[0].senha){
-    res.status(200).json({condi: true})
+    res.status(200).json([{condi: true}, {user}])
   }}
   catch(err){
     res.status(500).json({message:"erro no login"})
