@@ -8,16 +8,5 @@ export const db = drizzle({connection: {
   authToken: process.env.TURSO_AUTH_TOKEN!,
 }});
 
-async function main() {
-  const user: typeof usersTable.$inferInsert = {
-    name: 'John',
-    saldo: 30,
-    cpf: '00000000000'
-  };
-
-  await db.insert(usersTable).values(user);
-  console.log('New user ' +user["name"] + ' created!')
-//cria usuario John
-}
 
 
