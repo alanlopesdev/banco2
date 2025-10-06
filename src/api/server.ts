@@ -55,7 +55,7 @@ app.post("/login", async (req, res) =>{
   try{
   const dados = req.body
   const user = await db.select().from(usersTable).where(eq(usersTable.cpf, `${dados.cpfPost}`))
-  if (dados.cpf === user[0].cpf && dados.senhaPost === user[0].senha){
+  if (dados.cpfPost === user[0].cpf && dados.senhaPost === user[0].senha){
     res.status(200).json({condi: true})
   }}
   catch(err){
