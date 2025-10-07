@@ -68,10 +68,10 @@ app.post("/login", async (req, res) =>{
 })
 
 
-app.post("/pix/:cpf", async (req, res) =>{
+app.post("/pix", async (req, res) =>{
   try{
-    const cpf = req.params.cpf
-    const valorPix = req.body
+    const cpf = req.body.cpf
+    const valorPix = req.body.valor
     console.log(valorPix)
     await db.update(usersTable).set({saldo:Number(valorPix)}).where(eq(usersTable.cpf, cpf))
   }
