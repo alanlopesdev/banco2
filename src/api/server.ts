@@ -73,7 +73,7 @@ app.post("pix/:cpf", async (req, res) =>{
     const cpf = req.params.cpf
     const valorPix = req.body
     console.log(valorPix)
-    await db.update(usersTable).set({saldo:valorPix}).where(eq(usersTable.cpf, cpf))
+    await db.update(usersTable).set({saldo:Number(valorPix)}).where(eq(usersTable.cpf, cpf))
   }
   catch(error){
     console.log(error)
