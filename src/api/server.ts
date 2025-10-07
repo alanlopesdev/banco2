@@ -68,7 +68,7 @@ app.post("/login", async (req, res) =>{
 })
 
 
-app.post("pix/:cpf", async (req, res) =>{
+app.post("/pix/:cpf", async (req, res) =>{
   try{
     const cpf = req.params.cpf
     const valorPix = req.body
