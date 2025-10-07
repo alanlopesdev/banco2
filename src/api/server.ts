@@ -6,10 +6,10 @@ import { db } from '../db/index'
 import { usersTable } from "../db/schema";
 import { eq } from 'drizzle-orm'
 
-// Cria a instância do aplicativo Express
+
 const app = express();
-// Define a porta em que o servidor vai rodar
-const port = 3000; // Você pode escolher outra porta se preferir
+
+const port = 3000;
 
 // --- Middlewares ---
 // Habilita o CORS para permitir requisições de outras origens (seu app React Native)
@@ -18,17 +18,15 @@ app.use(cors());
 app.use(express.json());
 
 
-// --- Rotas ---
-// Rota de teste para verificar se a API está funcionando
+
 app.get("/", (req, res) => {
   res.status(200).send({ message: "API está funcionando corretamente!" });
 });
 
-// Futuramente, adicionaremos as rotas para manipular os usuários aqui.
-// 2. NOVA ROTA: Buscar todos os usuários
+
 app.get("/users", async (req, res) => {
     try {
-      // Usa o 'db.select()' para fazer um 'SELECT * FROM users_table'
+      
       const users = await db.select().from(usersTable);
       res.status(200).json(users);
     } catch (error) {
@@ -41,7 +39,7 @@ app.get("/users", async (req, res) => {
 app.get("/login/:cpf/", async (req, res) =>{
   try {
   let cpf = req.params.cpf
-  const user = await db.select().from(usersTable).where(eq(usersTable.cpf, `${cpf}`))
+  const user = await db.select().from(usersTable).where(eq(usersTable.cpf, cpf))
   res.status(200).json(user)
   }
   catch(err){
@@ -67,6 +65,19 @@ app.post("/login", async (req, res) =>{
     res.status(500).json({message:"erro no login"})
   }
 
+})
+
+
+app.post("pix/:cpf", async (req, res) =>{
+  try{
+    const cpf = req.params.cpf
+    const valorPix = req.body
+    console.log(valorPix)
+    await db.update(usersTable).set({saldo:valorPix}).where(eq(usersTable.cpf, cpf))
+  }
+  catch(error){
+    console.log(error)
+  }
 })
 
   
