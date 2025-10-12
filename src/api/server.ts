@@ -71,7 +71,7 @@ app.post("/login", async (req, res) =>{
 app.post("/pix", async (req, res) =>{
   try{
     const cpf = req.body.cpf
-    const valorPix = req.body.valorpix
+    const valorPix = req.body.valor
     const saldoAtual = await db.select({saldo: usersTable.saldo}).from(usersTable).where(eq(usersTable.cpf, cpf))
     const saldoTotal = Number(valorPix) + saldoAtual[0].saldo
     await db.update(usersTable).set({saldo:saldoTotal}).where(eq(usersTable.cpf, cpf))
